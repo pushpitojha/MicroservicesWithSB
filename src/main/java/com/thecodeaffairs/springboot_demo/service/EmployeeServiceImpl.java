@@ -1,5 +1,6 @@
 package com.thecodeaffairs.springboot_demo.service;
 
+import com.thecodeaffairs.springboot_demo.error.EmployeeNotFoundException;
 import com.thecodeaffairs.springboot_demo.model.Employee;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(String id) {
-        return employeeList.stream().filter(e -> e.getEmpId().equals(id)).findFirst().get();
+//        return employeeList.stream().filter(e -> e.getEmpId().equals(id)).findFirst().get();
+
+//        return employeeList.stream().filter(e -> e.getEmpId().equals(id)).findFirst()
+//                .orElseThrow(() -> new RuntimeException(" " + "Employee not found with Id: "+ id));
+
+        return employeeList.stream().filter(e -> e.getEmpId().equals(id)).findFirst()
+                .orElseThrow(() -> new EmployeeNotFoundException(" " + "Employee not found with Id: "+ id));
     }
 
     @Override
